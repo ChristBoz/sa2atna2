@@ -187,8 +187,6 @@ function createEventCard(event) {
     genresDiv.appendChild(tag);
   }
 
-
-
   const actionsDiv = document.createElement("div");
   actionsDiv.className = "card-actions";
   const detailsBtn = document.createElement("button");

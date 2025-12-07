@@ -141,7 +141,7 @@ function renderEventsGrid() {
     card.addEventListener("click", () => selectEvent(ev.id));
     eventsGrid.appendChild(card);
   });
-  
+
   console.log(`Rendered ${eventsGrid.children.length} event cards`);
 }
 
