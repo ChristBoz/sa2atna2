@@ -1,11 +1,6 @@
 import { auth } from "./firebase-config.js";
 import { onAuthStateChanged as fbOnAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import {
-  geocodePlace,
-  haversineDistanceKm,
-  loadUserLocation,
-  saveUserLocation,
-} from "./geocode.js";
+import { geocodePlace } from "./geocode.js";
 
 // Safety: read event id from URL and bail early if missing
 const urlParams = new URLSearchParams(window.location.search);
@@ -22,8 +17,6 @@ let currentUser = null;
 let currentEvent = null;
 let isFavorited = false;
 let registrationStatus = "unknown";
-let userLocation = loadUserLocation();
-let eventCoordinates = null;
 
 window.addEventListener("DOMContentLoaded", async () => {
   fbOnAuthStateChanged(auth, async (firebaseUser) => {
@@ -39,8 +32,6 @@ window.addEventListener("DOMContentLoaded", async () => {
   });
 
   await loadEvent();
-  wireLocationButtons();
-  updateLocationStatus();
 });
 
 async function loadCurrentUser(firebaseUser) {
@@ -101,9 +92,7 @@ async function loadEvent() {
 
     if (data.success && data.event) {
       currentEvent = data.event;
-      eventCoordinates = await getEventCoordinates(currentEvent);
       renderEvent();
-      updateDistanceFromUser();
     } else {
       showError("Event not found");
     }
@@ -197,88 +186,6 @@ function renderEvent() {
 
   // Initialize comments after event is rendered
   setTimeout(() => initializeComments(), 500);
-}
-
-function wireLocationButtons() {
-  document
-    .getElementById("detail-location-gps")
-    ?.addEventListener("click", handleBrowserLocation);
-}
-
-function handleBrowserLocation() {
-  if (!navigator.geolocation) {
-    alert("Your browser does not support geolocation.");
-    return;
-  }
-
-  setLocationStatus("Requesting your location...");
-  navigator.geolocation.getCurrentPosition(
-    (pos) => {
-      userLocation = {
-        lat: pos.coords.latitude,
-        lng: pos.coords.longitude,
-        label: "Current location",
-      };
-      saveUserLocation(userLocation);
-      updateDistanceFromUser();
-      updateLocationStatus();
-    },
-    (err) => {
-      console.error("Geolocation error", err);
-      setLocationStatus(
-        err.code === err.PERMISSION_DENIED
-          ? "Turn on location permissions to see distances."
-          : "We couldn't read your location. Try again."
-      );
-    }
-  );
-}
-
-function setLocationStatus(text) {
-  const status = document.getElementById("detail-location-status");
-  if (status) status.textContent = text;
-}
-
-function updateLocationStatus() {
-  const status = document.getElementById("detail-location-status");
-  if (!status) return;
-  if (userLocation) {
-    status.textContent = `Distances shown from ${userLocation.label}`;
-  } else {
-    status.textContent = "Tap the button to use your device location.";
-  }
-}
-
-async function updateDistanceFromUser() {
-  const distanceLabel = document.getElementById("info-distance");
-  if (!distanceLabel) return;
-  if (!userLocation) {
-    distanceLabel.textContent = "Set your location to see the distance.";
-    return;
-  }
-
-  if (!eventCoordinates) {
-    distanceLabel.textContent = "We couldn't find coordinates for this event.";
-    return;
-  }
-
-  const km = haversineDistanceKm(userLocation, eventCoordinates).toFixed(1);
-  distanceLabel.textContent = `${km} km away from you`;
-}
-
-async function getEventCoordinates(evt) {
-  const lat = parseFloat(evt.lat);
-  const lng = parseFloat(evt.lng);
-  if (!Number.isNaN(lat) && !Number.isNaN(lng)) return { lat, lng };
-
-  if (evt.location) {
-    try {
-      return await geocodePlace(evt.location);
-    } catch (err) {
-      console.warn("Unable to geocode event location", evt.location, err);
-    }
-  }
-  return null;
 }
 
 function resetButton(id) {
