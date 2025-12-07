@@ -103,9 +103,11 @@ async function ensureAdmin(user) {
 
 // ---------- UI rendering ----------
 function renderEventsGrid() {
+  console.log(`Rendering events grid with ${events.length} events`);
   eventsGrid.innerHTML = "";
 
   if (!events.length) {
+    console.log("No events to render, showing empty state");
     selectedEventId = null;
     const url = new URL(window.location.href);
     url.searchParams.delete("id");
@@ -117,6 +119,7 @@ function renderEventsGrid() {
   }
 
   noEvents.style.display = "none";
+  console.log("Rendering event cards...");
 
   events.forEach((ev) => {
     const card = document.createElement("article");
@@ -138,6 +141,8 @@ function renderEventsGrid() {
     card.addEventListener("click", () => selectEvent(ev.id));
     eventsGrid.appendChild(card);
   });
+  
+  console.log(`Rendered ${eventsGrid.children.length} event cards`);
 }
 
 function setGenresSelection(selected) {
@@ -148,6 +153,7 @@ function setGenresSelection(selected) {
 }
 
 function populateForm(ev) {
+  console.log("Populating form with event data:", ev);
   titleInput.value = ev.name || "";
   descInput.value = ev.description || "";
   dateInput.value = normalizeDateForInput(ev.date);
@@ -163,6 +169,7 @@ function populateForm(ev) {
 
   editSubtitle.textContent = ev.name ? `Editing: ${ev.name}` : "Editing event";
   editFormSection.classList.add("active");
+  console.log("Form populated and made visible");
 }
 
 // ---------- data loading ----------
@@ -186,30 +193,57 @@ async function loadGenres() {
 }
 
 async function loadEvents() {
-  const res = await fetch("api/admin/events.php", {
-    headers: {
-      Authorization: `Bearer ${await currentUser.getIdToken()}`,
-      "X-Firebase-UID": currentUser.uid,
-    },
-  });
-
-  const data = await res.json();
-  if (!res.ok || data.success === false) {
-    throw new Error(data.error || "Failed to load events");
+  console.log("Loading events...");
+  
+  // Show loading state
+  if (eventsGrid) {
+    eventsGrid.innerHTML = '<div style="text-align: center; padding: 20px; color: #6b7280;">Loading events...</div>';
   }
 
-  events = data.events || [];
-  renderEventsGrid();
+  try {
+    const res = await fetch("api/admin/events.php", {
+      headers: {
+        Authorization: `Bearer ${await currentUser.getIdToken()}`,
+        "X-Firebase-UID": currentUser.uid,
+      },
+    });
 
-  const fromUrl = getEventIdFromUrl();
-  const matched = fromUrl ? events.find((e) => e.id === fromUrl) : null;
+    console.log("Events API response status:", res.status);
+    
+    const data = await res.json();
+    console.log("Events API response data:", data);
+    
+    if (!res.ok || data.success === false) {
+      throw new Error(data.error || "Failed to load events");
+    }
 
-  if (matched) {
-    selectEvent(matched.id);
-  } else if (events[0]) {
-    selectEvent(events[0].id);
-  } else {
-    showAlert("No events available to edit. Create one first.", "info");
+    events = data.events || [];
+    console.log(`Loaded ${events.length} events`);
+    
+    renderEventsGrid();
+
+    const fromUrl = getEventIdFromUrl();
+    const matched = fromUrl ? events.find((e) => e.id === fromUrl) : null;
+
+    if (matched) {
+      console.log(`Selecting event from URL: ${fromUrl}`);
+      selectEvent(matched.id);
+    } else if (events.length > 0) {
+      console.log(`Selecting first event: ${events[0].id}`);
+      selectEvent(events[0].id);
+    } else {
+      console.log("No events available");
+      showAlert("No events available to edit. Create one first.", "info");
+    }
+  } catch (error) {
+    console.error("Error loading events:", error);
+    if (eventsGrid) {
+      eventsGrid.innerHTML = `<div style="text-align: center; padding: 20px; color: #ef4444;">
+        <p>Failed to load events</p>
+        <p style="font-size: 0.9rem; color: #6b7280;">${error.message}</p>
+      </div>`;
+    }
+    throw error;
   }
 }
 
@@ -240,8 +274,10 @@ async function uploadImageFile(file) {
 }
 
 async function selectEvent(eventId) {
+  console.log(`Attempting to select event: ${eventId}`);
   const match = events.find((e) => e.id === Number(eventId));
   if (!match) {
+    console.warn(`Event ${eventId} not found in events array`);
     showAlert("Missing ?id= in URL for event. Showing the first available event.", "info");
     if (events[0]) {
       return selectEvent(events[0].id);
@@ -250,6 +286,8 @@ async function selectEvent(eventId) {
   }
 
   selectedEventId = Number(eventId);
+  console.log(`Selected event: ${selectedEventId} - ${match.name}`);
+  
   const url = new URL(window.location.href);
   url.searchParams.set("id", selectedEventId);
   window.history.replaceState({}, "", url);
@@ -378,17 +416,28 @@ async function handleDelete() {
 
 // ---------- init ----------
 function init() {
+  console.log("Initializing edit-event page");
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
+      console.log("No user logged in, redirecting to login");
       window.location.href = "login.html";
       return;
     }
 
+    console.log("User authenticated:", user.uid);
     currentUser = user;
     try {
+      console.log("Checking admin permissions...");
       await ensureAdmin(user);
+      console.log("Admin permissions verified");
+      
+      console.log("Loading genres...");
       await loadGenres();
+      console.log("Genres loaded");
+      
+      console.log("Loading events...");
       await loadEvents();
+      console.log("Events loaded and displayed");
     } catch (err) {
       console.error("Error initializing edit page:", err);
       alert(err.message || "Unable to load event.");
