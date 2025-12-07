@@ -197,7 +197,13 @@ async function loadEvents() {
   
   // Show loading state
   if (eventsGrid) {
-    eventsGrid.innerHTML = '<div style="text-align: center; padding: 20px; color: #6b7280;">Loading events...</div>';
+    const loadingDiv = document.createElement('div');
+    loadingDiv.style.textAlign = 'center';
+    loadingDiv.style.padding = '20px';
+    loadingDiv.style.color = '#6b7280';
+    loadingDiv.textContent = 'Loading events...';
+    eventsGrid.innerHTML = '';
+    eventsGrid.appendChild(loadingDiv);
   }
 
   try {
@@ -238,10 +244,23 @@ async function loadEvents() {
   } catch (error) {
     console.error("Error loading events:", error);
     if (eventsGrid) {
-      eventsGrid.innerHTML = `<div style="text-align: center; padding: 20px; color: #ef4444;">
-        <p>Failed to load events</p>
-        <p style="font-size: 0.9rem; color: #6b7280;">${error.message}</p>
-      </div>`;
+      eventsGrid.innerHTML = '';
+      const errorDiv = document.createElement('div');
+      errorDiv.style.textAlign = 'center';
+      errorDiv.style.padding = '20px';
+      errorDiv.style.color = '#ef4444';
+      
+      const errorTitle = document.createElement('p');
+      errorTitle.textContent = 'Failed to load events';
+      errorDiv.appendChild(errorTitle);
+      
+      const errorMsg = document.createElement('p');
+      errorMsg.style.fontSize = '0.9rem';
+      errorMsg.style.color = '#6b7280';
+      errorMsg.textContent = error.message; // Safe: textContent automatically escapes
+      errorDiv.appendChild(errorMsg);
+      
+      eventsGrid.appendChild(errorDiv);
     }
     throw error;
   }
