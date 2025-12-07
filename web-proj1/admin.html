@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="admin-dashboard.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#admin-main">Skip to content</a>
+
+    <!-- HEADER / NAV -->
+    <header class="tm-navbar">
+      <div class="tm-nav-content">
+        <div class="tm-logo">
+          <a href="index.html">EventFinder</a>
+        </div>
+
+        <nav class="tm-links">
+          <a href="index.html">Home</a>
+          <a href="favorites.html" id="favorites-link" style="display: none">Favorites</a>
+          <a href="registrations.html" id="registrations-link" style="display: none">Registrations</a>
+          <a href="account.html" id="profile-link" style="display: none">Account</a>
+          <a href="admin.html" class="active" id="admin-link">Admin</a>
+        </nav>
+
+        <div class="tm-search">
+          <input type="text" id="header-search" placeholder="Search events..." />
+          <button id="header-search-btn"><span>Search</span></button>
+        </div>
+
+        <div class="tm-auth">
+          <a href="login.html" class="tm-login-btn" id="login-btn">Login</a>
+          <div class="user-menu" id="user-menu" style="display: none">
+            <div class="user-avatar" id="user-avatar">U</div>
+            <div class="admin-badge" id="admin-badge" style="display: none">ADMIN</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="admin-main">
+      <section class="admin-hero">
+        <div>
+          <p class="eyebrow">Admin area</p>
+          <h1>Welcome back</h1>
+          <p class="lede">
+            Manage events, review registrations, and jump into the tools you use most.
+          </p>
+
+          <div class="quick-actions">
+            <a class="qa-btn primary" href="addEvents.html">Add event</a>
+            <a class="qa-btn" href="edit-event.html">Manage events</a>
+            <a class="qa-btn ghost" href="index.html">View site</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="scripts/admin-dashboard.js"></script>
+  </body>
+</html>

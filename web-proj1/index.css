@@ -1,0 +1,588 @@
+/* =========================================================================
+   GLOBAL
+   ========================================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+    color: #222;
+    line-height: 1.6;
+}
+
+/* Skip Link */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #0ab4ff;
+    color: #000;
+    padding: 8px 16px;
+    z-index: 999;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: top 0.3s;
+}
+.skip-link:focus {
+    top: 10px;
+}
+
+/* =========================================================================
+   HEADER — TICKETMASTER STYLE
+   ========================================================================= */
+
+.tm-navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: #111;
+    padding: 0.7rem 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.tm-nav-content {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+/* LOGO */
+.tm-logo a {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #0ab4ff;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+}
+
+/* NAV LINKS */
+.tm-links {
+    display: flex;
+    gap: 20px;
+    margin-left: 40px;
+}
+
+.tm-links a {
+    color: #ddd;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: 0.25s;
+}
+
+.tm-links a:hover,
+.tm-links a.active {
+    background: #1c1c1c;
+    color: #0ab4ff;
+}
+
+/* SEARCH BAR */
+.tm-search {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.tm-search input {
+    padding: 8px 12px;
+    width: 220px;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background: #222;
+    color: white;
+    transition: 0.25s;
+}
+
+.tm-search input:focus {
+    border-color: #0ab4ff;
+    width: 260px;
+}
+
+.tm-search button {
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    background: #0ab4ff;
+    color: #111;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.tm-search button:hover {
+    background: #36c4ff;
+}
+
+/* LOGIN BUTTON */
+.tm-login-btn {
+    background: #0ab4ff;
+    padding: 7px 14px;
+    border-radius: 6px;
+    color: #111;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 10px;
+    transition: 0.25s;
+}
+
+.tm-login-btn:hover {
+    background: #36c4ff;
+}
+
+/* =========================================================================
+   HERO SECTION
+   ========================================================================= */
+
+#hero {
+    text-align: center;
+    padding: 80px 15px;
+    background: linear-gradient(to bottom right, #0ab4ff, #0066cc);
+    color: white;
+}
+
+#hero h2 {
+    font-size: 2.6rem;
+    margin-bottom: 10px;
+}
+
+#hero p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+}
+
+#search-bar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#search-input {
+    width: 300px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+}
+
+#search-btn {
+    background: #111;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+#search-btn:hover {
+    background: #222;
+}
+
+/* =========================================================================
+   FILTER SECTION — NOW COLLAPSIBLE
+   ========================================================================= */
+
+#filters {
+    max-width: 1200px;
+    margin: 25px auto;
+    padding: 0 20px;
+}
+
+#filters h3 {
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+#filter-form {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+}
+/* FILTER TOGGLE BUTTON */
+#filter-toggle {
+    width: 100%;
+    background: #0ab4ff;
+    color: #111;
+    border: none;
+    padding: 14px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 12px;
+    text-align: left;
+    transition: background 0.3s;
+}
+
+#filter-toggle:hover {
+    background: #36c4ff;
+}
+
+/* FILTER PANEL COLLAPSE ANIMATION */
+#filter-panel {
+    overflow: hidden;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    transition: max-height 0.4s ease, padding 0.3s ease;
+}
+
+/* COLLAPSED */
+#filter-panel.collapsed {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* EXPANDED */
+#filter-panel.expanded {
+    max-height: 900px; /* enough for all filter fields */
+    padding: 20px;
+}
+
+
+/* FILTER FIELDS */
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.filter-group input,
+.filter-group select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.location-card {
+    margin-top: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 14px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.location-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.location-title {
+    font-weight: 700;
+    margin: 0;
+}
+
+.location-status {
+    margin: 4px 0 0;
+    color: #4b5563;
+}
+
+.location-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.location-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+.location-buttons button {
+    flex: 1;
+    min-width: 180px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background: #0ab4ff;
+    font-weight: 700;
+    color: #111;
+}
+
+.location-buttons button:hover {
+    background: #36c4ff;
+}
+
+.location-hint {
+    margin: 6px 0 0;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+/* FILTER BUTTON */
+#filter-form button {
+    grid-column: 1 / -1;
+    padding: 12px;
+    background: #0ab4ff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #111;
+}
+
+#filter-form button:hover {
+    background: #36c4ff;
+}
+
+/* =========================================================================
+   EVENT CARDS
+   ========================================================================= */
+
+#events-section {
+    max-width: 1200px;
+    padding: 10px 20px 40px;
+    margin: 0 auto;
+}
+
+#events-section h3 {
+    font-size: 1.6rem;
+    margin: 20px 0;
+}
+
+#events-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.event-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    padding-bottom: 15px;
+    transition: 0.25s;
+}
+
+.event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.18);
+}
+
+.event-preview img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+/* CARD CONTENT */
+.event-card h4 {
+    font-size: 1.2rem;
+    padding: 10px 12px;
+}
+
+.event-info {
+    padding: 0 12px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+/* CARD BUTTONS */
+.details-btn,
+.favorite-btn {
+    display: block;
+    width: calc(100% - 24px);
+    margin: 8px 12px;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.details-btn {
+    background: #0ab4ff;
+    color: #111;
+}
+
+.details-btn:hover {
+    background: #36c4ff;
+}
+
+.favorite-btn {
+    background: #eee;
+}
+
+.favorite-btn:hover {
+    background: #ddd;
+}
+
+/* =========================================================================
+   FOOTER
+   ========================================================================= */
+
+footer {
+    margin-top: 40px;
+    padding: 25px;
+    background: #111;
+    color: #ccc;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #0ab4ff;
+}
+
+/* Genre filter chips and card enhancements */
+.genre-filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+    justify-content: center;
+}
+
+.genre-chip {
+    padding: 10px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.genre-chip:hover {
+    border-color: #667eea;
+    background: #f0f3ff;
+    transform: translateY(-2px);
+}
+
+.genre-chip.active {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.event-card {
+    position: relative;
+}
+
+.event-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.event-price {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.event-genres {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}
+
+.event-genre-tag {
+    background: #f0f0f0;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.favorite-btn {
+    transition: all 0.3s;
+}
+
+.favorite-btn.favorited {
+    background: #ff6b6b;
+    color: white;
+}
+
+.favorite-btn.favorited:hover {
+    background: #ff5252;
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 60px;
+    color: #999;
+    font-size: 1.2rem;
+}
+
+.no-events {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+}
+
+.event-distance {
+    color: #667eea;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.user-menu {
+    position: relative;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.admin-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff6b6b;
+    color: white;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: bold;
+}

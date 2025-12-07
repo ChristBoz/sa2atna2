@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin — Edit Events</title>
+    <link rel="stylesheet" href="event-add.css" />
+    <link rel="stylesheet" href="admin-events.css" />
+  </head>
+
+  <body>
+    <aside class="sidebar">
+      <h2 class="logo">Eventify Admin</h2>
+      <nav>
+        <a class="nav-link" href="admin.html">Dashboard</a>
+        <a class="nav-link" href="addEvents.html">Add Event</a>
+        <a class="nav-link active" href="edit-event.html">Manage Events</a>
+        <a class="nav-link" href="index.html">Home</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <header class="page-header">
+        <h1>Edit Events</h1>
+        <p>Select an event to update its details or image.</p>
+      </header>
+
+      <div id="form-alert" class="alert"></div>
+
+      <section id="events-section">
+        <div id="events-grid" class="events-grid"></div>
+        <div id="no-events" class="no-events" style="display: none">
+          No events available yet. Create one first.
+        </div>
+      </section>
+
+      <section id="edit-form" class="edit-form">
+        <h2>Edit Event</h2>
+        <p id="edit-subtitle">Loading event...</p>
+
+        <form id="edit-event-form" class="event-form">
+          <div class="input-group">
+            <label for="title">Event Title</label>
+            <input type="text" id="title" name="title" required />
+          </div>
+
+          <div class="input-group">
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              rows="4"
+              placeholder="Describe your event..."
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="input-group">
+              <label for="date">Date</label>
+              <input type="date" id="date" name="date" required />
+            </div>
+            <div class="input-group">
+              <label for="time">Time</label>
+              <input type="time" id="time" name="time" required />
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="location">Location</label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              placeholder="Location"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="price">Price</label>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              min="0"
+              step="0.01"
+              placeholder="0.00"
+            />
+          </div>
+
+          <div class="input-group">
+            <label>Genres</label>
+            <div id="genre-selection" class="genre-selection"></div>
+          </div>
+
+          <div class="input-group">
+            <label for="image_file">Change Image (optional)</label>
+            <input
+              type="file"
+              id="image_file"
+              name="image_file"
+              accept="image/*"
+            />
+            <small>Leave empty to keep current image.</small>
+          </div>
+
+          <div class="input-group" id="image-preview-wrapper" style="display: none">
+            <label>Current / New Image</label>
+            <img
+              id="image-preview"
+              alt="Event image preview"
+              style="max-width: 200px; display: block; border-radius: 6px"
+            />
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="submit-btn" class="btn-primary">
+              Save Changes
+            </button>
+            <button type="button" id="delete-btn" class="btn-danger">
+              Delete Event
+            </button>
+            <button type="button" id="cancel-btn" class="btn-secondary">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <script type="module" src="scripts/admin-edit-event.js"></script>
+  </body>
+</html>

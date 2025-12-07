@@ -1,0 +1,153 @@
+/* ============================================================
+   GLOBAL
+   ============================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+    color: #222;
+    line-height: 1.7;
+}
+
+/* Skip Link */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #0ab4ff;
+    color: #000;
+    padding: 8px 16px;
+    border-radius: 4px;
+    z-index: 999;
+    text-decoration: none;
+    transition: top 0.3s ease;
+}
+.skip-link:focus {
+    top: 10px;
+}
+
+/* ============================================================
+   HEADER — MATCHING HOME PAGE THEME
+   ============================================================ */
+
+header {
+    background: #111;
+    padding: 20px 0;
+    color: white;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.35);
+}
+
+header h1 {
+    margin-bottom: 10px;
+    font-size: 2rem;
+    color: #0ab4ff;
+}
+
+/* NAVIGATION */
+header nav {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+header nav a {
+    color: #ddd;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: 0.25s ease;
+}
+
+header nav a:hover {
+    background: #1c1c1c;
+    color: #0ab4ff;
+}
+
+/* ============================================================
+   MAIN CONTENT — ABOUT PAGE SECTIONS
+   ============================================================ */
+
+main {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 25px;
+    background: white;
+    border-radius: 14px;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    border: 1px solid #e9e9e9;
+}
+
+section h2 {
+    font-size: 1.6rem;
+    color: #0a1f44;
+    margin-bottom: 10px;
+    border-left: 5px solid #0ab4ff;
+    padding-left: 12px;
+}
+
+section p {
+    font-size: 1rem;
+    margin-top: 6px;
+    color: #444;
+}
+
+/* ============================================================
+   FOOTER — MATCHING HOME PAGE FOOTER
+   ============================================================ */
+
+footer {
+    background: #111;
+    color: #ccc;
+    text-align: center;
+    padding: 25px;
+    font-size: 0.9rem;
+    margin-top: 40px;
+}
+
+footer .disclaimer,
+footer .ai-disclosure,
+footer .last-updated {
+    margin-top: 5px;
+}
+
+footer a {
+    color: #0ab4ff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #36c4ff;
+}
+
+/* ============================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================ */
+
+@media (max-width: 600px) {
+    header nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    section {
+        padding: 20px;
+    }
+}

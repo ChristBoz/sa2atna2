@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="View and manage your event registrations on Event Finder." />
+    <meta name="author" content="Event Finder Team" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="registrations.css" />
+    <title>My Registrations | Event Finder</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#registrations-section">Skip to content</a>
+
+    <header class="tm-navbar">
+      <div class="tm-nav-content">
+        <div class="tm-logo">
+          <a href="index.html">EventFinder</a>
+        </div>
+        <nav class="tm-links">
+          <a href="index.html">Home</a>
+          <a href="favorites.html" id="favorites-link" style="display: none">Favorites</a>
+          <a href="registrations.html" class="active">Registrations</a>
+          <a href="account.html" id="profile-link" style="display: none">Account</a>
+          <a href="admin.html" id="admin-link" style="display: none">Admin</a>
+        </nav>
+        <div class="tm-search">
+          <input type="text" id="header-search" placeholder="Search events..." />
+          <button id="header-search-btn"><span>Search</span></button>
+        </div>
+        <div class="tm-auth">
+          <a href="login.html" class="tm-login-btn" id="login-btn">Login</a>
+          <div class="user-menu" id="user-menu" style="display: none">
+            <div class="user-avatar" id="user-avatar">U</div>
+            <div class="admin-badge" id="admin-badge" style="display: none">ADMIN</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="registrations-header">
+      <h2>Your Registrations</h2>
+      <p id="registrations-subtitle">Track the events you've signed up for.</p>
+    </section>
+
+    <main id="registrations-section">
+      <div id="registrations-container" class="loading">
+        <p>⏳ Loading your registrations...</p>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2025 Event Finder</p>
+      <p class="disclaimer">Discover and register for great events.</p>
+    </footer>
+
+    <script type="module" src="scripts/registrations.js"></script>
+  </body>
+</html>

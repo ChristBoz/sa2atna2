@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Event details and registration page for Event Finder."
+    />
+    <meta name="author" content="Event Finder Team" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="event.css" />
+    <title>Event Details | Event Finder</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <!-- HEADER -->
+    <header class="tm-navbar">
+      <div class="tm-nav-content">
+        <div class="tm-logo">
+          <a href="index.html">EventFinder</a>
+        </div>
+        <nav class="tm-links">
+          <a href="index.html">Home</a>
+          <a href="favorites.html" id="favorites-link" style="display: none"
+            >Favorites</a
+          >
+          <a
+            href="registrations.html"
+            id="registrations-link"
+            style="display: none"
+            >Registrations</a
+          >
+          <a href="account.html" id="profile-link" style="display: none"
+            >Account</a
+          >
+          <a href="admin.html" id="admin-link" style="display: none">Admin</a>
+        </nav>
+        <div class="tm-search">
+          <input
+            type="text"
+            id="header-search"
+            placeholder="Search events..."
+          />
+          <button id="header-search-btn"><span>Search</span></button>
+        </div>
+        <div class="tm-auth">
+          <a href="login.html" class="tm-login-btn" id="login-btn">Login</a>
+          <div class="user-menu" id="user-menu" style="display: none">
+            <div class="user-avatar" id="user-avatar">U</div>
+            <div class="admin-badge" id="admin-badge" style="display: none">
+              ADMIN
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Loading State -->
+    <div id="loading-container" class="loading">
+      <p>⏳ Loading event details...</p>
+    </div>
+
+    <!-- Main Content (hidden until loaded) -->
+    <div id="event-content" style="display: none">
+      <!-- HERO / BANNER -->
+      <section id="event-hero">
+        <img
+          src="https://via.placeholder.com/1200x400?text=Event"
+          alt="Event image"
+          id="event-main-image"
+        />
+        <div id="event-title-box">
+          <h2 id="event-title">Loading...</h2>
+          <p id="event-subtitle">Loading...</p>
+          <div class="event-genres" id="event-genres"></div>
+        </div>
+      </section>
+
+      <!-- MAIN CONTENT -->
+      <main id="main-content">
+        <div class="event-grid">
+          <!-- Left Column -->
+          <div class="event-info-column">
+            <section id="description">
+              <h3>📝 Description</h3>
+              <p id="event-description">Loading description...</p>
+            </section>
+
+            <section id="info-section">
+              <h3>ℹ️ Event Information</h3>
+              <ul>
+                <li><strong>📅 Date:</strong> <span id="info-date">-</span></li>
+                <li><strong>🕐 Time:</strong> <span id="info-time">-</span></li>
+                <li>
+                  <strong>💰 Price:</strong> <span id="info-price">-</span>
+                </li>
+                <li>
+                  <strong>📍 Distance:</strong>
+                  <span id="info-distance">Set your location to see distance.</span>
+                </li>
+              </ul>
+
+              <div class="creator-info" id="creator-info" style="display: none">
+                <strong>👤 Created by:</strong> <span id="creator-name">-</span
+                ><br />
+                <small>Posted on <span id="created-date">-</span></small>
+              </div>
+            </section>
+
+            <section class="distance-card">
+              <h3>📍 Distance from you</h3>
+              <p id="detail-location-status">
+                Use your device location to see how far this event is from you.
+              </p>
+              <div class="distance-actions">
+                <div class="distance-buttons">
+                  <button type="button" id="detail-location-gps">
+                    Use my device location
+                  </button>
+                </div>
+                <p class="distance-hint">Saved only in your browser.</p>
+              </div>
+            </section>
+
+          </div>
+
+          <!-- Right Column -->
+          <aside class="ticket-box">
+            <div class="ticket-card">
+              <h3>🎟️ Tickets & Registration</h3>
+              <div class="price-display" id="ticket-price">$0.00</div>
+              <p id="ticket-info">Get your tickets now!</p>
+              <button id="register-btn">🎫 Register Now</button>
+              <button id="favorite-btn">♡ Add to Favorites</button>
+              <p
+                id="register-status"
+                class="status-text"
+                aria-live="polite"
+              ></p>
+            </div>
+          </aside>
+        </div>
+        <!-- Comments Section -->
+        <section id="comments-section" class="comments-section">
+          <h3>Comments</h3>
+
+          <div id="comment-form-container" style="display: none">
+            <form id="comment-form">
+              <textarea
+                id="comment-input"
+                placeholder="Share your thoughts about this event..."
+                maxlength="1000"
+                rows="3"
+                required
+              ></textarea>
+              <div class="comment-form-footer">
+                <span id="char-count">0/1000</span>
+                <button type="submit">Post Comment</button>
+              </div>
+            </form>
+          </div>
+
+          <div id="comments-container">
+            <p>⏳ Loading comments...</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>© 2025 Event Finder</p>
+      <p class="disclaimer">Discover amazing events near you.</p>
+    </footer>
+
+    <!-- Firebase: expose auth and onAuthStateChanged to the page -->
+    <script type="module" src="scripts/event.js"></script>
+  </body>
+</html>

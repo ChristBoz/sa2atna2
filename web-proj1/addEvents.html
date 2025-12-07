@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin — Add Event</title>
+    <link rel="stylesheet" href="event-add.css" />
+  </head>
+
+  <body>
+    <aside class="sidebar">
+      <h2 class="logo">Eventify Admin</h2>
+      <nav>
+        <a class="nav-link" href="admin.html">Admin profile</a>
+        <a class="nav-link" href="admin-users.html" data-require-owner
+          >Admin Users</a
+        >
+        <a class="nav-link active" href="addEvents.html">Add Events</a>
+        <a class="nav-link" href="edit-event.html">Edit Events</a>
+        <a class="nav-link" href="index.html">Home</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <header class="page-header">
+        <h1>Add New Event</h1>
+        <p>Fill out the form to create and publish a new event.</p>
+      </header>
+
+      <div id="alert-container"></div>
+
+      <section class="form-wrapper">
+        <form id="add-event-form">
+          <div class="input-group">
+            <label>Event Title *</label>
+            <input type="text" id="title" name="title" required />
+          </div>
+
+          <div class="input-group">
+            <label>Description *</label>
+            <textarea
+              id="description"
+              name="description"
+              rows="5"
+              required
+            ></textarea>
+          </div>
+
+          <div class="input-group">
+            <label>Genres *</label>
+            <div id="genre-selection" class="genre-selection">
+              <!-- Genres will be loaded here -->
+              <p>Loading genres...</p>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="input-group">
+              <label>Date *</label>
+              <input type="date" id="date" name="date" required />
+            </div>
+
+            <div class="input-group">
+              <label>Time *</label>
+              <input type="time" id="time" name="time" required />
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Location *</label>
+            <input type="text" id="location" name="location" required />
+          </div>
+
+          <div class="input-group">
+            <label>Ticket Price ($)</label>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              min="0"
+              step="0.01"
+              placeholder="0.00"
+            />
+          </div>
+<div class="input-group">
+  <label>Upload Image</label>
+  <input
+    type="file"
+    id="image_file"
+    name="image_file"
+    accept="image/*"
+  />
+  <small>Supported: JPG, PNG, WEBP (max ~2MB)</small>
+</div>
+
+<div class="input-group" id="image-preview-wrapper" style="display:none;">
+  <label>Preview</label>
+  <img
+    id="image-preview"
+    style="max-width:200px; display:block; border-radius:6px;"
+  />
+</div>
+
+
+
+          <button type="submit" class="submit-btn" id="submit-btn">
+            <span id="btn-text">Add Event</span>
+            <span id="btn-loader" style="display: none">⏳ Creating... </span>
+          </button>
+        </form>
+      </section>
+
+      <footer class="footer">
+        <p>© 2025 Eventify Admin — Development Mode</p>
+      </footer>
+    </main>
+
+    <!-- Firebase -->
+<script type="module" src="scripts/admin-add-event.js"></script>
+
+
+  </body>
+</html>

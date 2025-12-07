@@ -1,0 +1,220 @@
+/* ========================== */
+/*         GLOBAL STYLES      */
+/* ========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f0f2f5, #d9e2ec);
+    color: #222;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ========================== */
+/*         LOGIN CARD          */
+/* ========================== */
+main.auth-card {
+    background: #fff;
+    width: 100%;
+    max-width: 420px;
+    padding: 50px 35px;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+main.auth-card:hover {
+    transform: translateY(-4px);
+}
+
+/* ========================== */
+/*         HEADER / TITLE      */
+/* ========================== */
+main.auth-card header h1 {
+    font-size: 2.2rem;
+    color: #007bff;
+    margin-bottom: 25px;
+}
+
+/* ========================== */
+/*        TAB BUTTONS          */
+/* ========================== */
+.tab-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
+}
+
+.tab-buttons button {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #666;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.tab-buttons button.active {
+    border-bottom: 4px solid #007bff;
+    color: #007bff;
+}
+
+/* ========================== */
+/*          FORMS              */
+/* ========================== */
+form.auth-form {
+    display: none;
+    text-align: left;
+}
+
+form.auth-form.active {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #444;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0,123,255,0.2);
+    outline: none;
+}
+
+/* ========================== */
+/*        BUTTON GROUP         */
+/* ========================== */
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.button-group button {
+    flex: 1;
+    padding: 14px 0;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.button-group button[type="submit"] {
+    background: linear-gradient(135deg, #007bff, #005fcc);
+    color: #fff;
+    box-shadow: 0 5px 12px rgba(0,123,255,0.3);
+}
+
+.button-group button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0,123,255,0.4);
+}
+
+.button-group button[type="reset"] {
+    background: #f0f0f0;
+    color: #555;
+}
+
+.button-group button[type="reset"]:hover {
+    background: #e0e0e0;
+}
+
+/* ========================== */
+/*       ERROR MESSAGES        */
+/* ========================== */
+.form-error {
+    background: #fff0f0;
+    border: 1px solid #ff4d4f;
+    color: #a30000;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-top: 10px;
+    display: none;
+}
+
+/* ========================== */
+/*           LINKS             */
+/* ========================== */
+a {
+    color: #007bff;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ========================== */
+/*        FOOTER STYLING        */
+/* ========================== */
+footer {
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+
+    font-size: 0.9rem;
+    color: #555;
+}
+
+footer a {
+    color: #007bff;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* ========================== */
+/*    SKIP LINK ACCESSIBILITY   */
+/* ========================== */
+.skip-link {
+    position: absolute;
+    left: -999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.skip-link:focus {
+    left: 10px;
+    top: 10px;
+    width: auto;
+    height: auto;
+    padding: 8px 12px;
+    background: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    z-index: 1000;
+}

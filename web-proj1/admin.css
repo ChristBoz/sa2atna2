@@ -1,0 +1,3 @@
+/* Aggregated admin styles to avoid missing asset errors */
+@import url('event-add.css');
+@import url('admin-events.css');

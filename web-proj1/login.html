@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Login or sign up to Event Finder to manage your profile and saved events."
+    />
+    <meta name="author" content="Event Finder Team" />
+    <title>Login / Sign Up</title>
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <main class="auth-card">
+      <div id="main-content"></div>
+      <header>
+        <h1>Welcome</h1>
+      </header>
+      <div class="tab-buttons">
+        <button id="login-tab" class="active">Login</button>
+        <button id="signup-tab">Sign Up</button>
+      </div>
+      <form id="login-form" class="auth-form active">
+        <div class="form-group">
+          <label for="login-email">Email</label>
+          <input
+            type="email"
+            id="login-email"
+            placeholder="you@example.com"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input
+            type="password"
+            id="login-password"
+            placeholder="••••••••"
+            required
+          />
+        </div>
+
+        <div class="button-group">
+          <button type="submit">Login</button>
+          <button type="reset">Reset</button>
+        </div>
+
+        <div
+          id="login-error"
+          class="form-error"
+          role="alert"
+          aria-live="polite"
+          style="display: none"
+        ></div>
+
+        <p>
+          Don't have an account? <a href="#" id="switch-to-signup">Sign Up</a>
+        </p>
+      </form>
+
+      <form id="signup-form" class="auth-form">
+        <div class="form-group">
+          <label for="fullname">Full Name</label>
+          <input type="text" id="fullname" placeholder="John Doe" required />
+        </div>
+
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" min="1" placeholder="18" required />
+        </div>
+
+        <div class="form-group">
+          <label for="signup-phone">Phone</label>
+          <input
+            type="tel"
+            id="signup-phone"
+            placeholder="+1 555 123 4567"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="signup-location">Location</label>
+          <input
+            type="text"
+            id="signup-location"
+            placeholder="City, Country"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="signup-email">Email</label>
+          <input
+            type="email"
+            id="signup-email"
+            placeholder="you@example.com"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="signup-password">Password</label>
+          <input
+            type="password"
+            id="signup-password"
+            placeholder="••••••••"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input
+            type="password"
+            id="confirm-password"
+            placeholder="••••••••"
+            required
+          />
+        </div>
+
+        <div class="button-group">
+          <button type="submit">Sign Up</button>
+          <button type="reset">Reset</button>
+        </div>
+
+        <div
+          id="signup-error"
+          class="form-error"
+          role="alert"
+          aria-live="polite"
+          style="display: none"
+        ></div>
+
+        <p>
+          Already have an account? <a href="#" id="switch-to-login">Login</a>
+        </p>
+      </form>
+    </main>
+
+    <script src="login.js" type="module"></script>
+
+    <footer>
+      <p>© 2025 Event Finder</p>
+      <p class="disclaimer">
+        Disclaimer: This site is for educational/demo purposes only. Do not use
+        for production.
+      </p>
+      <p class="ai-disclosure">
+        AI-assistance: Some content may have been generated or assisted using AI
+        tools — see <a href="README.md">README</a>.
+      </p>
+      <p class="last-updated">Last updated: 2025-11-25</p>
+    </footer>
+  </body>
+</html>

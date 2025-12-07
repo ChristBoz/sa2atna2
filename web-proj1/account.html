@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="account.css" />
+    <meta
+      name="description"
+      content="Your Event Finder profile — view and manage your account and registered events."
+    />
+    <meta name="author" content="Event Finder Team" />
+    <title>Your Profile | Event Finder</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#profile-main">Skip to content</a>
+
+    <header class="tm-navbar">
+      <div class="tm-nav-content">
+        <div class="tm-logo">
+          <a href="index.html">EventFinder</a>
+        </div>
+        <nav class="tm-links">
+          <a href="index.html">Home</a>
+          <a href="favorites.html" id="favorites-link" style="display: none">Favorites</a>
+          <a href="registrations.html" id="registrations-link" style="display: none">Registrations</a>
+          <a href="account.html" id="profile-link" class="active">Account</a>
+          <a href="admin.html" id="admin-link" style="display: none">Admin</a>
+        </nav>
+        <div class="tm-search">
+          <input type="text" id="header-search" placeholder="Search events..." />
+          <button id="header-search-btn"><span>Search</span></button>
+        </div>
+        <div class="tm-auth">
+          <a href="login.html" class="tm-login-btn" id="login-btn">Login</a>
+          <div class="user-menu" id="user-menu" style="display: none">
+            <div class="user-avatar" id="user-avatar">U</div>
+            <div class="admin-badge" id="admin-badge" style="display: none">ADMIN</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========================= -->
+    <!--        PROFILE HEADER      -->
+    <!-- ========================= -->
+    <section id="profile-header">
+      <h2>Your Profile</h2>
+      <p>Manage your information and view your activity.</p>
+    </section>
+
+    <!-- ========================= -->
+    <!--      PROFILE CONTENT       -->
+    <!-- ========================= -->
+    <main id="profile-main">
+      <!-- USER INFO CARD -->
+      <section id="user-info-card">
+        <h3>Account Information</h3>
+
+        <ul class="user-info-list">
+          <li><strong>Name:</strong> <span id="user-name">John Doe</span></li>
+          <li>
+            <strong>Email:</strong>
+            <span id="user-email">john@example.com</span>
+          </li>
+          <li><strong>Age:</strong> <span id="user-age">22</span></li>
+          <li><strong>Phone:</strong> <span id="user-phone">N/A</span></li>
+          <li><strong>Location:</strong> <span id="user-location">N/A</span></li>
+          <li>
+            <strong>Member Since:</strong>
+            <span id="user-joined">January 2025</span>
+          </li>
+        </ul>
+
+        <button id="edit-profile-btn" type="button">Edit Profile</button>
+        <button id="change-password-btn" type="button">Change Password</button>
+        <button id="logout-btn" type="button">Logout</button>
+      </section>
+
+      <!-- QUICK LINKS -->
+      <section id="registered-events">
+        <h3>Your Activity</h3>
+
+        <div class="quick-actions">
+          <button id="registered-events-btn" class="primary-btn">
+            View Registered Events
+          </button>
+          <button id="favorite-events-btn" class="secondary-btn">
+            View Favorite Events
+          </button>
+          <button id="delete-account-btn" class="danger-btn">Delete Account</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- ========================= -->
+    <!--          FOOTER           -->
+    <!-- ========================= -->
+    <footer>
+      <script src="scripts/account.js" type="module"></script>
+      <p>© 2025 Event Finder</p>
+      <p class="disclaimer">
+        Disclaimer: This site is for educational/demo purposes only. Do not use
+        for production.
+      </p>
+      <p class="ai-disclosure">
+        AI-assistance: Some code or content may have been generated or assisted
+        using AI tools — see <a href="README.md">README</a>.
+      </p>
+      <p class="last-updated">Last updated: 2025-11-25</p>
+    </footer>
+  </body>
+</html>

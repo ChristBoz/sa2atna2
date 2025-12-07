@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Finder | Home</title>
+    <meta
+      name="description"
+      content="Discover concerts, festivals, shows, and more near you."
+    />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <!-- HEADER / NAV -->
+    <header class="tm-navbar">
+      <div class="tm-nav-content">
+        <!-- LOGO -->
+        <div class="tm-logo">
+          <a href="index.html">EventFinder</a>
+        </div>
+
+        <!-- NAV LINKS -->
+        <nav class="tm-links">
+          <a href="index.html" class="active">Home</a>
+          <a href="favorites.html" id="favorites-link" style="display: none"
+            >Favorites</a
+          >
+          <a href="registrations.html" id="registrations-link" style="display: none"
+            >Registrations</a
+          >
+          <a href="account.html" id="profile-link" style="display: none"
+            >Account</a
+          >
+          <a href="admin.html" id="admin-link" style="display: none">Admin</a>
+        </nav>
+
+        <!-- SEARCH -->
+        <div class="tm-search">
+          <input
+            type="text"
+            id="header-search"
+            placeholder="Search events..."
+          />
+          <button id="header-search-btn"><span>Search</span></button>
+        </div>
+
+        <!-- AUTH -->
+        <div class="tm-auth">
+          <a href="login.html" class="tm-login-btn" id="login-btn">Login</a>
+          <div class="user-menu" id="user-menu" style="display: none">
+            <div class="user-avatar" id="user-avatar">U</div>
+            <div class="admin-badge" id="admin-badge" style="display: none">
+              ADMIN
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main id="main-content">
+      <!-- HERO -->
+      <section id="hero">
+        <h2>Find Events Near You</h2>
+        <p>Concerts • Sports • Festivals • Workshops • And More</p>
+
+        <div class="search-bar">
+          <input type="text" id="search-input" placeholder="Search events..." />
+          <button id="search-btn">Search</button>
+        </div>
+      </section>
+
+      <!-- GENRE FILTERS -->
+      <section id="genre-section">
+        <div class="genre-filters" id="genre-filters">
+          <div class="genre-chip active" data-genre="">
+            <span>🎉</span>
+            <span>All Events</span>
+          </div>
+          <!-- Genres loaded dynamically -->
+        </div>
+      </section>
+
+      <!-- FILTERS -->
+      <section id="filters">
+        <button id="filter-toggle" type="button" aria-expanded="false">
+          Advanced Filters ▾
+        </button>
+
+        <div id="filter-panel" class="collapsed">
+          <form id="filter-form">
+            <div class="filter-group">
+              <label for="filter-date">Date</label>
+              <input type="date" id="filter-date" />
+            </div>
+
+            <div class="filter-group">
+              <label for="filter-price">Max Price ($)</label>
+              <input
+                type="number"
+                id="filter-price"
+                placeholder="Any price"
+                min="0"
+                step="0.01"
+              />
+            </div>
+
+            <div class="filter-group">
+              <label for="filter-sort">Sort By</label>
+              <select id="filter-sort">
+                <option value="">Default</option>
+                <option value="date">Date (Earliest First)</option>
+                <option value="price-low">Price (Low to High)</option>
+                <option value="price-high">Price (High to Low)</option>
+                <option value="name">Name (A-Z)</option>
+              </select>
+            </div>
+
+            <div class="location-card">
+              <div class="location-card-header">
+                <div>
+                  <p class="location-title">Show distance from you</p>
+                  <p class="location-status" id="location-status">
+                    Use your device location to see how far events are from you.
+                  </p>
+                </div>
+              </div>
+              <div class="location-actions">
+                <div class="location-buttons">
+                  <button type="button" id="location-gps-btn">
+                    Use my device location
+                  </button>
+                </div>
+                <p class="location-hint">We only store your choice locally.</p>
+              </div>
+            </div>
+
+            <button type="submit" id="apply-filters-btn">Apply Filters</button>
+            <button type="button" id="clear-filters-btn">Clear Filters</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- EVENTS -->
+      <section id="events-section">
+        <h3 id="events-heading">All Events</h3>
+
+        <div id="events-container" class="loading-spinner">
+          <p>⏳ Loading events...</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>© 2025 Event Finder</p>
+      <p class="disclaimer">Discover amazing events near you.</p>
+    </footer>
+
+    <!-- Firebase -->
+    <!-- Firebase ES6 Module -->
+    <script type="module" src="scripts/index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,167 @@
+/* ========================= */
+/*       GLOBAL STYLE        */
+/* ========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+    color: #333;
+}
+
+
+/* ========================= */
+/*       PROFILE HEADER      */
+/* ========================= */
+
+#profile-header {
+    text-align: center;
+    padding: 50px 20px 30px;
+}
+
+#profile-header h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+#profile-header p {
+    color: #555;
+    font-size: 18px;
+}
+
+
+/* ========================= */
+/*       MAIN CONTENT        */
+/* ========================= */
+
+#profile-main {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+    display: grid;
+    gap: 40px;
+}
+
+
+/* ========================= */
+/*      USER INFO CARD       */
+/* ========================= */
+
+#user-info-card {
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+#user-info-card h3 {
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+.user-info-list {
+    list-style: none;
+    margin-bottom: 25px;
+}
+
+.user-info-list li {
+    padding: 8px 0;
+    font-size: 17px;
+    border-bottom: 1px solid #eee;
+}
+
+.user-info-list strong {
+    margin-right: 5px;
+}
+
+#user-info-card button {
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 15px;
+    padding: 10px 18px;
+    border: none;
+    background: #0077ff;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#user-info-card button:hover {
+    background: #005fcc;
+}
+
+
+/* ========================= */
+/*   REGISTERED EVENTS LIST  */
+/* ========================= */
+
+#registered-events {
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+#registered-events h3 {
+    margin-bottom: 20px;
+}
+
+.quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.quick-actions .primary-btn,
+.quick-actions .secondary-btn,
+.quick-actions .danger-btn {
+    padding: 12px 18px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.primary-btn {
+    background: #0077ff;
+    color: #fff;
+}
+
+.primary-btn:hover {
+    background: #005fcc;
+}
+
+.secondary-btn {
+    background: #f4f7ff;
+    color: #0d3b6f;
+    border-color: #d6e4ff;
+}
+
+.secondary-btn:hover {
+    background: #e6eeff;
+}
+
+.danger-btn {
+    background: #fff1f0;
+    color: #c62828;
+    border-color: #ffcdd2;
+}
+
+.danger-btn:hover {
+    background: #ffe0e0;
+}
+
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #555;
+    margin-top: 40px;
+}

@@ -1,0 +1,172 @@
+/* Basic layout */
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background: #f7f9fb;
+  color: #222;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-link:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  background: #0056b3;
+  color: #fff;
+  z-index: 1000;
+}
+
+#registrations-header {
+  padding: 48px 32px 16px;
+}
+
+#registrations-header h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+#registrations-header p {
+  margin: 8px 0 0;
+  color: #4a5568;
+}
+
+#registrations-section {
+  padding: 0 32px 48px;
+}
+
+#registrations-container.loading {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+.registrations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.registration-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.registration-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.registration-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.registration-info h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.registration-details {
+  margin: 0;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+.registration-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: #ebf8ff;
+  color: #1c6aa2;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.registration-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.registration-actions button,
+.registration-actions a {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+}
+
+.view-btn {
+  background: #0c1b33;
+  color: #fff;
+}
+
+.cancel-btn {
+  background: #fbecec;
+  color: #b83227;
+  border: 1px solid #f5c6cb;
+}
+
+.empty-state,
+.auth-required,
+.error-state {
+  background: #fff;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  text-align: center;
+}
+
+.browse-btn,
+.login-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 16px;
+  background: #0c1b33;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+footer {
+  text-align: center;
+  padding: 28px;
+  color: #4a5568;
+}
+
+@media (max-width: 640px) {
+  #navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .tm-links a {
+    margin-left: 0;
+    margin-right: 12px;
+  }
+}
