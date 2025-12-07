@@ -8,15 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
 
-function distance_km($lat1, $lon1, $lat2, $lon2) {
-    $R = 6371;
-    $dLat = deg2rad($lat2 - $lat1);
-    $dLon = deg2rad($lon2 - $lon1);
-    $a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * sin($dLon/2) * sin($dLon/2);
-    $c = 2 * atan2(sqrt($a), sqrt(1-$a));
-    return $R * $c;
-}
-
 try {
     $db = require __DIR__ . '/db.php';
 
@@ -150,28 +141,6 @@ try {
 
     $stmt->execute();
     $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // Optional: distance filtering
-    $lat = isset($_GET['lat']) ? floatval($_GET['lat']) : null;
-    $lng = isset($_GET['lng']) ? floatval($_GET['lng']) : null;
-    $radius = isset($_GET['radius']) ? floatval($_GET['radius']) : 50;
-
-    if ($lat !== null && $lng !== null) {
-        $filtered = [];
-        foreach ($events as $e) {
-            if (isset($e['lat']) && isset($e['lng']) && $e['lat'] !== null && $e['lng'] !== null) {
-                $d = distance_km($lat, $lng, floatval($e['lat']), floatval($e['lng']));
-                if ($d > $radius) {
-                    continue; // skip events outside the requested radius
-                }
-                $e['distance_km'] = round($d, 2);
-            }
-            // Keep events without coordinates so geolocation doesn't hide everything
-            $filtered[] = $e;
-        }
-        $events = $filtered;
-        $total = count($filtered);
-    }
 
     echo json_encode([
         'success' => true,

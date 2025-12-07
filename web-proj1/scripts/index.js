@@ -1,18 +1,12 @@
 import { auth } from "./firebase-config.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import {
-  geocodePlace,
-  haversineDistanceKm,
-  loadUserLocation,
-  saveUserLocation,
-} from "./geocode.js";
+import { geocodePlace } from "./geocode.js";
 
 let allEvents = [];
 let allGenres = [];
 let userFavorites = [];
 let currentUser = null;
 let selectedGenre = "";
-let userLocation = null;
 
 window.addEventListener("DOMContentLoaded", async () => {
   onAuthStateChanged(auth, async (firebaseUser) => {
@@ -28,16 +22,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   await loadGenres();
   await loadEvents();
   setupEventListeners();
-  hydrateSavedLocation();
 });
-
-function hydrateSavedLocation() {
-  userLocation = loadUserLocation();
-  updateLocationStatus();
-  if (userLocation && allEvents.length) {
-    addDistancesToEvents().then(renderEvents);
-  }
-}
 
 async function loadCurrentUser(firebaseUser) {
   try {
@@ -202,12 +187,6 @@ function createEventCard(event) {
     genresDiv.appendChild(tag);
   }
 
-  const distancePara = document.createElement("p");
-  distancePara.className = "event-distance";
-  if (event.distance_km) {
-    distancePara.textContent = `📍 ${event.distance_km} km away`;
-  }
-
   const actionsDiv = document.createElement("div");
   actionsDiv.className = "card-actions";
   const detailsBtn = document.createElement("button");
@@ -231,7 +210,6 @@ function createEventCard(event) {
   card.appendChild(preview);
   card.appendChild(h4);
   card.appendChild(infoP);
-  if (event.distance_km) card.appendChild(distancePara);
   card.appendChild(genresDiv);
   card.appendChild(actionsDiv);
 
@@ -267,7 +245,6 @@ async function loadEvents() {
 
     if (data.success) {
       allEvents = data.events;
-      await addDistancesToEvents();
       renderEvents();
     } else {
       throw new Error(data.error || "Failed to load events");
@@ -293,39 +270,6 @@ function renderEvents() {
 
   container.innerHTML = "";
   allEvents.forEach((event) => container.appendChild(createEventCard(event)));
-}
-
-async function addDistancesToEvents() {
-  if (!userLocation) {
-    allEvents.forEach((evt) => delete evt.distance_km);
-    return;
-  }
-
-  const promises = allEvents.map(async (evt) => {
-    const coords = await getEventCoordinates(evt);
-    if (coords) {
-      evt.distance_km = haversineDistanceKm(userLocation, coords).toFixed(1);
-    } else {
-      delete evt.distance_km;
-    }
-  });
-
-  await Promise.all(promises);
-}
-
-async function getEventCoordinates(evt) {
-  const lat = parseFloat(evt.lat);
-  const lng = parseFloat(evt.lng);
-  if (!Number.isNaN(lat) && !Number.isNaN(lng)) return { lat, lng };
-
-  if (evt.location) {
-    try {
-      return await geocodePlace(evt.location);
-    } catch (err) {
-      console.warn("Unable to geocode event location", evt.location, err);
-    }
-  }
-  return null;
 }
 
 // Load favorites
@@ -480,58 +424,9 @@ function setupEventListeners() {
       loadEvents();
     });
   }
-
-  document
-    .getElementById("location-gps-btn")
-    ?.addEventListener("click", handleBrowserLocation);
 }
 
 function applyFilters() {
   selectedGenre = selectedGenre || "";
   loadEvents();
-}
-
-function handleBrowserLocation() {
-  if (!navigator.geolocation) {
-    alert("Your browser does not support geolocation.");
-    return;
-  }
-
-  setLocationStatus("Requesting your location...");
-  navigator.geolocation.getCurrentPosition(
-    async (pos) => {
-      userLocation = {
-        lat: pos.coords.latitude,
-        lng: pos.coords.longitude,
-        label: "Current location",
-      };
-      saveUserLocation(userLocation);
-      await addDistancesToEvents();
-      renderEvents();
-      updateLocationStatus();
-    },
-    (err) => {
-      console.error("Geolocation error", err);
-      setLocationStatus(
-        err.code === err.PERMISSION_DENIED
-          ? "Turn on location permissions to see distances."
-          : "We couldn't read your location. Try again."
-      );
-    }
-  );
-}
-
-function setLocationStatus(text) {
-  const status = document.getElementById("location-status");
-  if (status) status.textContent = text;
-}
-
-function updateLocationStatus() {
-  const status = document.getElementById("location-status");
-  if (!status) return;
-  if (userLocation) {
-    status.textContent = `Distances shown from ${userLocation.label}`;
-  } else {
-    status.textContent = "Tap the button to use your device location.";
-  }
 }
